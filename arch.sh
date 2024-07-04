@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
-COUNTRY=Bangladesh,India
+
 REGION=Asia
 CITY=Dhaka
 
-clear
 
 echo "--------------------------------------"
-echo "----ARCH MINIMAL w/ NVIDIA----------"
 echo "--------------------------------------"
+echo "----------ARCH MINIMAL----------------"
 echo "--------------------------------------"
 echo "--------------------------------------"
 echo " "
+echo "NOTE: make sure to update your mirrolist by running mirror.sh or by yourself"
+echo " "
+
 
 echo "The main Drive: (example /dev/sda or /dev/nvme0n1)"
 read DRIVE
@@ -52,26 +54,20 @@ mount ${ROOT} /mnt
 mount --mkdir ${EFI} /mnt/boot/efi
 mount --mkdir ${HOME} /mnt/home
 
-# mirrorlist
-echo -e "\nGenerating Fastest Mirrorlist...\n"
-
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-reflector --verbose --download-timeout 30 -l 10 --country ${COUNTRY} --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
-
 # configure pacaman
 
-# pacman.conf:
-# 33 -> #Color > Color
-# 36 -> #VerbosePkgList > VerbosePkgList
-# 37 -> #ParallelDownlads > ParallelDownlads
-# 90 -> #[multilib] > [multilib]
-# 91 -> #Include > Include
-# 37 -> Add new line ILoveCandy
+sed -i 's/^#Color/Color/' /etc/pacman.conf
+sed -i 's/^#VerbosePkgList/VerbosePkgList/' /etc/pacman.conf
+sed -i 's/^#ParallelDownlads/ParallelDownlads/' /etc/pacman.conf
+sed -i '90{s/.*/[multilib]/}' /etc/pacman.conf
+sed -i '91{s/.*/Include = /etc/pacman.d/mirrorlist/}' /etc/pacman.conf
+sed -i '37a\ILoveCandy' /etc/pacman.conf
+
 pacman -Sy
 
 # Main Linux
 echo "--------------------------------------"
-echo "-- INSTALLING Arch Linux Minimal including GRUB on Main Drive       --"
+echo "-- INSTALLING Arch Linux Minimal including GRUB on Main Drive------"
 echo "--------------------------------------"
 # pacstrap -K /mnt base linux linux-firmware base-devel nano bash-completion grub efibootmgr networkmanager linux-headers --noconfirm --needed
 pacstrap -K /mnt base linux  base-devel nano bash-completion grub efibootmgr networkmanager linux-headers --noconfirm --needed
