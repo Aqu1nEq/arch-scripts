@@ -120,7 +120,7 @@ sed -i '37a\ILoveCandy/' /etc/pacman.conf
 
 # boot manager
 echo "-------------------------------------------------"
-echo "Installing and setting yp GRUB"
+echo "Installing and setting up GRUB"
 echo "-------------------------------------------------"
 grub-install /dev/${DRIVE}
 grub-mkconfig -o /boot/grub/grub.cfg
