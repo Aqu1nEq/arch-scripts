@@ -41,22 +41,22 @@ read PASSWORD
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
-mkfs.fat -F 32 "${EFI}"
-mkswap "${SWAP}"
-swapon "${SWAP}"
-mkfs.ext4 "${ROOT}"
-mkfs.ext4 "${HOME}"
+mkfs.fat -F 32 ${EFI}
+mkswap ${SWAP}
+swapon ${SWAP}
+mkfs.ext4 ${ROOT}
+mkfs.ext4 ${HOME}
 
 # mount target
-mount "${ROOT}" /mnt
-mount --mkdir "${EFI}" /mnt/boot/efi
-mount --mkdir "${HOME}" /mnt/home
+mount ${ROOT} /mnt
+mount --mkdir ${EFI} /mnt/boot/efi
+mount --mkdir ${HOME} /mnt/home
 
 # mirrorlist
 echo -e "\nGenerating Fastest Mirrorlist...\n"
 
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-reflector --verbose --download-timeout 30 --latest 10 --country ${COUNTRY} --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose --download-timeout 30 -l 10 --country ${COUNTRY} --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 
 # configure pacaman
 
