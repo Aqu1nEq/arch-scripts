@@ -15,19 +15,19 @@ echo "NOTE: make sure to update your mirrorlist by running mirror.sh or edit by 
 echo " "
 
 
-echo "Enter The main Drive: (example /dev/sda or nvme0n1)"
+echo "Enter The main Drive: (example sda or nvme0n1)"
 read DRIVE
 
-echo "Enter EFI paritition: (example /sda1 or nvme0n1p1)"
+echo "Enter EFI paritition: (example sda1 or nvme0n1p1)"
 read EFI
 
-echo "Enter SWAP paritition: (example /sda2)"
+echo "Enter SWAP paritition: (example sda2)"
 read SWAP
 
-echo "Enter Root(/) paritition: (example /sda3)"
+echo "Enter Root(/) paritition: (example sda3)"
 read ROOT 
 
-echo "Enter Home(/home) paritition: (example /sda4)"
+echo "Enter Home(/home) paritition: (example sda4)"
 read HOME
 
 echo "Enter your hostname"
@@ -43,17 +43,17 @@ read PASSWORD
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
-mkfs.fat -F 32 ${EFI}
-mkswap ${SWAP}
-swapon ${SWAP}
-mkfs.ext4 -F ${ROOT}
-mkfs.ext4 -F ${HOME}
+mkfs.fat -F 32 /dev/${EFI}
+mkswap /dev/${SWAP}
+swapon /dev/${SWAP}
+mkfs.ext4 -F /dev/${ROOT}
+mkfs.ext4 -F /dev/${HOME}
 
 # mount target
 echo -e "\nMounting Targets...\n"
-mount ${ROOT} /mnt
-mount --mkdir ${EFI} /mnt/boot/efi
-mount --mkdir ${HOME} /mnt/home
+mount /dev/${ROOT} /mnt
+mount --mkdir /dev/${EFI} /mnt/boot/efi
+mount --mkdir /dev/${HOME} /mnt/home
 
 # configure pacaman
 echo -e "\Configuring Pacman...\n"
@@ -67,7 +67,7 @@ sed -i '90s/.*/[multilib]/' /etc/pacman.conf
 sed -i '91s/.*/Include = \/etc\/pacman\.d\/mirrorlist/' /etc/pacman.conf
 sed -i '37a\ILoveCandy' /etc/pacman.conf
 
-pacman -Sy
+pacman -Sy 
 
 # Main Linux
 echo "--------------------------------------"
@@ -122,7 +122,7 @@ sed -i '37a\ILoveCandy/' /etc/pacman.conf
 echo "-------------------------------------------------"
 echo "Installing and setting yp GRUB"
 echo "-------------------------------------------------"
-grub-install ${DRIVE}
+grub-install /dev/${DRIVE}
 grub-mkconfig -o /boot/grub/grub.cfg
 
 
