@@ -56,11 +56,13 @@ mount --mkdir ${HOME} /mnt/home
 
 # configure pacaman
 
+cp /etc/pacman.conf /etc/pacman.conf.backup
+
 sed -i 's/^#Color/Color/' /etc/pacman.conf
 sed -i 's/^#VerbosePkgList/VerbosePkgList/' /etc/pacman.conf
 sed -i 's/^#ParallelDownlads/ParallelDownlads/' /etc/pacman.conf
 sed -i '90{s/.*/[multilib]/}' /etc/pacman.conf
-sed -i '91{s/.*/Include = /etc/pacman.d/mirrorlist/}' /etc/pacman.conf
+sed -i '91s/.*/Include = etc\/pacman\.d\/mirrolist' /etc/pacman.conf
 sed -i '37a\ILoveCandy' /etc/pacman.conf
 
 pacman -Sy
