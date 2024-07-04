@@ -116,7 +116,7 @@ sed -i 's/^#VerbosePkgList/VerbosePkgList/' /etc/pacman.conf
 sed -i 's/^#ParallelDownlads/ParallelDownlads/' /etc/pacman.conf
 sed -i '90s/.*/[multilib]/' /etc/pacman.conf
 sed -i '91s/.*/Include = \/etc\/pacman\.d\/mirrorlist/' /etc/pacman.conf
-sed -i '37a\ILoveCandy' /etc/pacman.conf
+sed -i '37a\ILoveCandy/' /etc/pacman.conf
 
 # boot manager
 echo "-------------------------------------------------"
