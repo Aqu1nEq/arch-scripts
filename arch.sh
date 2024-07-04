@@ -56,24 +56,24 @@ mount --mkdir "${HOME}" /mnt/home
 echo -e "\nGenerating Fastest Mirrorlist...\n"
 
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-reflector --verbose --download-timeout 30 --latest 10 --country "${COUNTRY}" --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose --download-timeout 30 --latest 10 --country ${COUNTRY} --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 
 # configure pacaman
 
-#pacman.conf:
-#33 -> #Color > Color
-#36 -> #VerbosePkgList > VerbosePkgList
-#37 -> #ParallelDownlads > ParallelDownlads
-#90 -> #[multilib] > [multilib]
-#91 -> #Include > Include
-#37 -> Add new line ILoveCandy
+# pacman.conf:
+# 33 -> #Color > Color
+# 36 -> #VerbosePkgList > VerbosePkgList
+# 37 -> #ParallelDownlads > ParallelDownlads
+# 90 -> #[multilib] > [multilib]
+# 91 -> #Include > Include
+# 37 -> Add new line ILoveCandy
 pacman -Sy
 
 # Main Linux
 echo "--------------------------------------"
 echo "-- INSTALLING Arch Linux Minimal including GRUB on Main Drive       --"
 echo "--------------------------------------"
-#pacstrap -K /mnt base linux linux-firmware base-devel nano bash-completion grub efibootmgr networkmanager linux-headers --noconfirm --needed
+# pacstrap -K /mnt base linux linux-firmware base-devel nano bash-completion grub efibootmgr networkmanager linux-headers --noconfirm --needed
 pacstrap -K /mnt base linux  base-devel nano bash-completion grub efibootmgr networkmanager linux-headers --noconfirm --needed
 
 # fstab
