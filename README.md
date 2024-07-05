@@ -41,7 +41,7 @@ Exmaple : `./arch.sh Asia Dhaka`
 
 # Nvidia Script
 After Installing arch
-Just ```curl -O https://raw.githubusercontent.com/Aqu1nEq/arch-scripts/testing/mirror.sh```
+Just ```curl -O https://raw.githubusercontent.com/Aqu1nEq/arch-scripts/testing/nvidia.sh```
 and ```chmod +x nvidia.sh``` then ```sudo ./nvidia.sh```
 
 **Any contribution is welcomed** 😊
