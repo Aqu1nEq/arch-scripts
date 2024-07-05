@@ -62,7 +62,7 @@ cp /etc/pacman.conf /etc/pacman.conf.backup
 
 sed -i 's/^#Color/Color/' /etc/pacman.conf
 sed -i 's/^#VerbosePkgList/VerbosePkgList/' /etc/pacman.conf
-sed -i 's/^#ParallelDownlads =/ParallelDownlads =/' /etc/pacman.conf
+sed -i 's/^#ParallelDownloads =/ParallelDownloads =/' /etc/pacman.conf
 sed -i '90s/.*/[multilib]/' /etc/pacman.conf
 sed -i '91s/.*/Include = \/etc\/pacman\.d\/mirrorlist/' /etc/pacman.conf
 sed -i '37a\ILoveCandy ' /etc/pacman.conf
@@ -88,7 +88,7 @@ echo $USER:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
 echo -e "\Configuring Sudoers file...\n"
-sed -i '$a Defaults rootpw' /etc/sudoers
+sed -i '$a Defaults rootpw ' /etc/sudoers
 
 echo "-------------------------------------------------"
 echo "Setup Language to US and set locale"
@@ -113,7 +113,7 @@ cp /etc/pacman.conf /etc/pacman.conf.backup
 
 sed -i 's/^#Color/Color/' /etc/pacman.conf
 sed -i 's/^#VerbosePkgList/VerbosePkgList/' /etc/pacman.conf
-sed -i 's/^#ParallelDownlads =/ParallelDownlads =/' /etc/pacman.conf
+sed -i 's/^#ParallelDownloads =/ParallelDownloads =/' /etc/pacman.conf
 sed -i '90s/.*/[multilib]/' /etc/pacman.conf
 sed -i '91s/.*/Include = \/etc\/pacman\.d\/mirrorlist/' /etc/pacman.conf
 sed -i '37a\ILoveCandy ' /etc/pacman.conf
