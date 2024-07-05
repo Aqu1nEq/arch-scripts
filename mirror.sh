@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-COUNTRY=Bangladesh,India
+COUNTRY=$1,$2
 
 # mirrorlist
 echo -e "\nGenerating Fastest Mirrorlist...\n"

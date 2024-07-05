@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 
-REGION=Asia
-CITY=Dhaka
+REGION=$1
+CITY=$2
 
 
 echo "--------------------------------------"
@@ -10,7 +10,7 @@ echo "--------------------------------------"
 echo "----------ARCH MINIMAL----------------"
 echo "--------------------------------------"
 echo "--------------------------------------"
-echo " "
+echo "Press Ctrl + c to exit "
 echo "NOTE: make sure to update your mirrorlist by running mirror.sh or edit by yourself"
 echo " "
 
@@ -80,32 +80,7 @@ pacstrap -K /mnt base linux  base-devel nano bash-completion grub efibootmgr net
 echo -e "\Generating fstab...\n"
 genfstab -U /mnt >> /mnt/etc/fstab
 
-cat <<REALEND > /mnt/home/${USER}/.bashrc
-#
-# ~/.bashrc
-#
-
-# If not running interactively, don't do anything
-[[ \$- != *i* ]] && return
-
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
-
-_rgh_completion() {
-    local cur prev words cword
-    _init_completion || return
-
-    local options='https://raw.githubusercontent.com'
-
-    COMPREPLY=( \$( compgen -W "\$options" -- "\$cur" ) )
-}
-
-complete -F _rgh_completion rgh
-
-REALEND
-
 cat <<REALEND > /mnt/next.sh
-source ~/.bashrc
 echo -e "\Changing root password and adding new user...\n"
 useradd -m -g users -G wheel,storage,power -s /bin/bash ${USER}
 echo "root:$PASSWORD" | chpasswd
