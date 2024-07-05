@@ -27,7 +27,7 @@ read SWAP
 echo "Enter Root(/) paritition: (example sda3)"
 read ROOT 
 
-echo "Enter Home(/home) paritition: (example sda4)"
+echo "Enter Home(/home) paritition: (example sda4) [OPTIONAL]"
 read HOME
 
 echo "Enter your hostname"
@@ -49,7 +49,13 @@ mkfs.fat -F 32 /dev/${EFI}
 mkswap /dev/${SWAP}
 swapon /dev/${SWAP}
 mkfs.ext4 -F /dev/${ROOT}
-mkfs.ext4 -F /dev/${HOME}
+
+
+if [ -z "$HOME" ]; then
+    echo "HOME variable is empty."
+else
+    mkfs.ext4 -F /dev/${HOME}
+fi
 
 # mount target
 echo "-------------------------------------------------"
@@ -57,7 +63,13 @@ echo -e "\nMounting Targets...\n"
 echo "-------------------------------------------------"
 mount /dev/${ROOT} /mnt
 mount --mkdir /dev/${EFI} /mnt/boot/efi
-mount --mkdir /dev/${HOME} /mnt/home
+
+if [ -z "$HOME" ]; then
+    echo "HOME variable is empty."
+else
+    echo "HOME variable is set to: $HOME"
+    mount --mkdir /dev/${HOME} /mnt/home
+fi
 
 # configure pacaman
 echo "-------------------------------------------------"
