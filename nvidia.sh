@@ -1,4 +1,4 @@
-pacman -S Install nvidia-dkms libglvnd nvidia-utils opencl-nvidia lib32-libglvnd lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader --noconfirm --needed
+pacman -S nvidia-dkms libglvnd nvidia-utils opencl-nvidia lib32-libglvnd lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader --noconfirm --needed
 
 # Remove kms from the HOOKS array in /etc/mkinitcpio.conf and regenerate the initramfs.
 
@@ -8,7 +8,7 @@ sed -i '7s/.*/GRUB_CMDLINE_LINUX="quiet splash nvidia_drm.modeset=1 nvidia_drm.f
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # in /etc/mkinitcpio.conf remove kms from line number 55
-sed -i '55s/^kms / /' /etc/mkinitcpio.conf
+sed -i '55s/kms //' /etc/mkinitcpio.conf
 
 # MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
 # line no.7
