@@ -18,7 +18,7 @@ Arch is a great distro. But setting it up can be a bit of a pain. So,
 | `/`                                | `/dev/root_partition` | Linux x86-64 root (/)                            | Remainder of the device. At least 23–32 GiB. |
 
 
-- Remember to create a separate home partition because of the install script.
+- Create a separate partition for home directory is optional.
 - Use curl to get the mirror.sh script and run it.
   `curl -O https://raw.githubusercontent.com/Aqu1nEq/arch-scripts/main/mirror.sh`
   `chmod +x mirror.sh`
