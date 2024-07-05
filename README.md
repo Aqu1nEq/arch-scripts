@@ -1,4 +1,4 @@
-# Ultimate Arch Scripts
+# Arch Made Easy
 `My custom scripts for arch linux`
 
 Arch is a great distro. But setting it up can be a bit of a pain. So,
