@@ -80,7 +80,32 @@ pacstrap -K /mnt base linux  base-devel nano bash-completion grub efibootmgr net
 echo -e "\Generating fstab...\n"
 genfstab -U /mnt >> /mnt/etc/fstab
 
+cat <<REALEND > /mnt/home/${USER}/.bashrc
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ \$- != *i* ]] && return
+
+alias ls='ls --color=auto'
+PS1='[\u@\h \W]\$ '
+
+_rgh_completion() {
+    local cur prev words cword
+    _init_completion || return
+
+    local options='https://raw.githubusercontent.com'
+
+    COMPREPLY=( \$( compgen -W "\$options" -- "\$cur" ) )
+}
+
+complete -F _rgh_completion rgh
+
+REALEND
+
 cat <<REALEND > /mnt/next.sh
+source ~/.bashrc
 echo -e "\Changing root password and adding new user...\n"
 useradd -m -g users -G wheel,storage,power -s /bin/bash ${USER}
 echo "root:$PASSWORD" | chpasswd
@@ -88,7 +113,7 @@ echo $USER:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
 echo -e "\Configuring Sudoers file...\n"
-sed -i '$a Defaults rootpw ' /etc/sudoers
+sed -i '\$a Defaults rootpw ' /etc/sudoers
 
 echo "-------------------------------------------------"
 echo "Setup Language to US and set locale"
@@ -135,3 +160,4 @@ echo "-------------------------------------------------"
 REALEND
 
 arch-chroot /mnt sh next.sh
+
