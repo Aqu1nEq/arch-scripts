@@ -1,0 +1,1 @@
+pacman -S gnome gnome-extra --noconfirm --needed

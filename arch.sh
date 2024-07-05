@@ -79,7 +79,7 @@ pacman -Sy
 echo "--------------------------------------"
 echo "-- INSTALLING Arch Linux Minimal including GRUB on Main Drive------"
 echo "--------------------------------------"
-pacstrap -K /mnt base linux linux-firmware base-devel nano bash-completion grub efibootmgr networkmanager linux-headers --noconfirm --needed
+pacstrap -K /mnt base linux linux-firmware base-devel nano bash-completion grub efibootmgr networkmanager linux-headers git dosfstools --noconfirm --needed
 
 # fstab
 echo -e "\Generating fstab...\n"
@@ -137,7 +137,8 @@ sed -i '37a\ILoveCandy ' /etc/pacman.conf
 echo "-------------------------------------------------"
 echo "Installing and setting up GRUB"
 echo "-------------------------------------------------"
-grub-install /dev/${DRIVE}
+mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+grub-install --target=x86_64-efi --bootloader-id=grub_uefi --efi-directory=/boot/efi --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "-------------------------------------------------"
