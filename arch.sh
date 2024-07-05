@@ -79,8 +79,7 @@ pacman -Sy
 echo "--------------------------------------"
 echo "-- INSTALLING Arch Linux Minimal including GRUB on Main Drive------"
 echo "--------------------------------------"
-# pacstrap -K /mnt base linux linux-firmware base-devel nano bash-completion grub efibootmgr networkmanager linux-headers --noconfirm --needed
-pacstrap -K /mnt base linux  base-devel nano bash-completion grub efibootmgr networkmanager linux-headers --noconfirm --needed
+pacstrap -K /mnt base linux linux-firmware base-devel nano bash-completion grub efibootmgr networkmanager linux-headers --noconfirm --needed
 
 # fstab
 echo -e "\Generating fstab...\n"
