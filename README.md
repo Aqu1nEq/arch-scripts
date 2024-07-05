@@ -39,6 +39,11 @@ Exmaple : `./mirror.sh US Canada`
 Exmaple : `./arch.sh Asia Dhaka`
 - Follow the instructions from there
 
+# Nvidia Script
+After Installing arch
+Just ```curl -O https://raw.githubusercontent.com/Aqu1nEq/arch-scripts/testing/mirror.sh```
+and ```chmod +x nvidia.sh``` then ```sudo ./nvidia.sh```
+
 **Any contribution is welcomed** 😊
 
 --**aqu1neq**--
