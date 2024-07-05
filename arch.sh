@@ -41,7 +41,9 @@ read PASSWORD
 
 
 # make filesystems
+echo "-------------------------------------------------"
 echo -e "\nCreating Filesystems...\n"
+echo "-------------------------------------------------"
 
 mkfs.fat -F 32 /dev/${EFI}
 mkswap /dev/${SWAP}
@@ -50,13 +52,17 @@ mkfs.ext4 -F /dev/${ROOT}
 mkfs.ext4 -F /dev/${HOME}
 
 # mount target
+echo "-------------------------------------------------"
 echo -e "\nMounting Targets...\n"
+echo "-------------------------------------------------"
 mount /dev/${ROOT} /mnt
 mount --mkdir /dev/${EFI} /mnt/boot/efi
 mount --mkdir /dev/${HOME} /mnt/home
 
 # configure pacaman
+echo "-------------------------------------------------"
 echo -e "\Configuring Pacman...\n"
+echo "-------------------------------------------------"
 
 cp /etc/pacman.conf /etc/pacman.conf.backup
 
@@ -81,13 +87,17 @@ echo -e "\Generating fstab...\n"
 genfstab -U /mnt >> /mnt/etc/fstab
 
 cat <<REALEND > /mnt/next.sh
-echo -e "\Changing root password and adding new user...\n"
+echo "-------------------------------------------------"
+echo -e "Changing root password and adding new user...\n"
+echo "-------------------------------------------------"
 useradd -m -g users -G wheel,storage,power -s /bin/bash ${USER}
 echo "root:$PASSWORD" | chpasswd
 echo $USER:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
-echo -e "\Configuring Sudoers file...\n"
+echo "-------------------------------------------------"
+echo -e "Configuring Sudoers file...\n"
+echo "-------------------------------------------------"
 sed -i '\$a Defaults rootpw ' /etc/sudoers
 
 echo "-------------------------------------------------"
@@ -101,14 +111,20 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 ln -sf /usr/share/zoneinfo/${REGION}/${CITY} /etc/localtime
 hwclock --systohc
 
-echo -e "\Setting Hostname...\n"
+echo "-------------------------------------------------"
+echo -e "Setting Hostname...\n"
+echo "-------------------------------------------------"
 echo "${HOST}" >> /etc/hostname
 
-echo -e "\Enabling Networkmanager and fstrim...\n"
+echo "-------------------------------------------------"
+echo -e "Enabling NetworkManager and fstrim...\n"
+echo "-------------------------------------------------"
 systemctl enable NetworkManager
 systemctl enable fstrim.timer
 
-echo -e "\Configuring Pacman...\n"
+echo "-------------------------------------------------"
+echo -e "Configuring Pacman...\n"
+echo "-------------------------------------------------"
 cp /etc/pacman.conf /etc/pacman.conf.backup
 
 sed -i 's/^#Color/Color/' /etc/pacman.conf
@@ -125,8 +141,9 @@ echo "-------------------------------------------------"
 grub-install /dev/${DRIVE}
 grub-mkconfig -o /boot/grub/grub.cfg
 
-
+echo "-------------------------------------------------"
 echo "You have to Install Desktop Yourself"
+echo "-------------------------------------------------"
 
 echo "-------------------------------------------------"
 echo "Install Complete, You can reboot now"
