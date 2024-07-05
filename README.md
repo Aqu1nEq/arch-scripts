@@ -13,9 +13,9 @@ Arch is a great distro. But setting it up can be a bit of a pain. So,
 
 | Mount point on the installed system | Partition                    | Partition type                                   | Suggested size                    |
 |------------------------------------|------------------------------|--------------------------------------------------|-----------------------------------|
-| `/boot`<sup>1</sup>                | `/dev/<i>efi_system_partition</i>` | [EFI system partition](https://en.wikipedia.org/wiki/GUID_Partition_Table#Partition_type_GUIDs) | 1 GiB                             |
-| `[SWAP]`                           | `/dev/<i>swap_partition</i>` | Linux swap                                       | At least 4 GiB                     |
-| `/`                                | `/dev/<i>root_partition</i>` | Linux x86-64 root (/)                            | Remainder of the device. At least 23–32 GiB. |
+| `/boot`          | `/dev/efi_system_partition` | [EFI system partition](https://en.wikipedia.org/wiki/GUID_Partition_Table#Partition_type_GUIDs) | 1 GiB                             |
+| `[SWAP]`                           | `/dev/swap_partition` | Linux swap                                       | At least 4 GiB                     |
+| `/`                                | `/dev/root_partition` | Linux x86-64 root (/)                            | Remainder of the device. At least 23–32 GiB. |
 
 
 - Remember to create a separate home partition because of the install script.
