@@ -9,7 +9,7 @@ Arch is a great distro. But setting it up can be a bit of a pain. So,
 -  **Boot into your arch iso and be sure that you are in UEFI mode**
 - **Verify boot mode:** `cat /sys/firmware/efi/fw_platform_size` should return 64 
 - - **Connect to the internet:** `ping 1.1.1.1` should respond otherwise, use USB tether from you phone
-- **Partition:** `lsblk`, then `cfdisk`. Delete partition or create new one from here. ![[.images/Pasted image 20240702134505.png]]
+- **Partition:** `lsblk`, then `cfdisk`. Delete partition or create new one from here. ![EXAMPLE PARTITION](.images/Pasted image 20240702134505.png)
 - Remember to create a separate home partition because of the install script.
 - Use curl to get the mirror.sh script and run it.
   `curl -O https://raw.githubusercontent.com/Aqu1nEq/arch-scripts/main/mirror.sh`
